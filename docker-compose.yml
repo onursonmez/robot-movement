@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./client
+    ports:
+      - '3333:80'
+  backend:
+    build:
+      context: ./server
+    ports:
+      - '4444:4444'
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/robot
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017'
