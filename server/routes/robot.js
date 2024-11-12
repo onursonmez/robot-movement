@@ -5,13 +5,10 @@ const router = express.Router();
 
 router.get('/position', async (req, res) => {
     const robot = await Robot.findOne().sort({ _id: -1 });
-    console.log(robot);
     res.json(robot || { x: 0, y: 0 });
 });
 
 router.post('/position', async (req, res) => {
-    console.log(req.body);
-
     try {
         // Belirli bir _id ile güncelleme yap, yoksa yeni bir kayıt oluştur
         const robot = await Robot.findOneAndUpdate(
